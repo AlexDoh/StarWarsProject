@@ -1,0 +1,7 @@
+body {
+    padding: 50px;
+    color: #00B7FF;
+    font-family: helvetica, serif;
+    background: url("../images/background.jpg") no-repeat fixed center;
+    background-size: cover;
+}
