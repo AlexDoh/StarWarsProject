@@ -6,7 +6,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let index = require('./routes/index');
-let users = require('./routes/heroes');
+let heroes = require('./routes/heroes');
 
 
 let app = express();
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-app.use('/heroes', users);
+app.use('/heroes', heroes);
 
 app.use(function (req, res, next) {
     let err = new Error('Not Found');

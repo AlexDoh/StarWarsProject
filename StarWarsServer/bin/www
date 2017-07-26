@@ -5,7 +5,7 @@
  */
 
 let app = require('../app');
-let debug = require('debug')('mynodejs:server');
+let debug = require('debug')('starwarsserver:server');
 let http = require('http');
 
 /**
