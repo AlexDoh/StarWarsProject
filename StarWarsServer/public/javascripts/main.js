@@ -1,15 +1,16 @@
 let mask = document.getElementById('mask');
 let close = document.getElementById('close');
 let table = document.getElementsByClassName('table')[0];
-if ($.cookie('modal_shown') !== null) {
+let idForIterateHero = 1;
 
-}
 $(document).ready(function() {
-    if ($.cookie('modal_shown') !== null) {
+    if ($.cookie('modal_shown') !== 'yes') {
         $.cookie('modal_shown', 'yes', { expires: 3, path: '/' });
+    } else {
         close.click();
     }
 });
+
 $(close).click(function () {
     $(mask).hide();
 });
@@ -19,11 +20,10 @@ $(window).click(function (event) {
     }
 });
 
-let id = 1;
-getJson(id);
+getJson(idForIterateHero);
 
-function addJsonToPage(id, json) {
-    $(table).find('td:nth-child(1)').html(id);
+function addJsonToPage(idForIterateHero, json) {
+    $(table).find('td:nth-child(1)').html(idForIterateHero);
     $(table).find('td:nth-child(2)').html(json.name);
     $(table).find('td:nth-child(3)').html(json.height);
     $(table).find('td:nth-child(4)').html(json.mass);
@@ -33,8 +33,8 @@ function addJsonToPage(id, json) {
     $(table).find('td:nth-child(8)').html(json.gender);
 }
 
-function getJson(id) {
-    let urlForJSON = "http://localhost:8080/heroes?id=" + id;
+function getJson(idForIterateHero) {
+    let urlForJSON = "http://localhost:8080/heroes?id=" + idForIterateHero;
     console.log(urlForJSON);
 
     $.ajax({
@@ -57,25 +57,25 @@ function getJson(id) {
 }
 
 $('#next').click(function () {
-    id++;
-    if (id > 88) {
-        id--;
+    idForIterateHero++;
+    if (idForIterateHero > 88) {
+        idForIterateHero--;
         return false;
-    } else if (id === 17) {
-        getJson(++id);
+    } else if (idForIterateHero === 17) {
+        getJson(++idForIterateHero);
     } else {
-        getJson(id);
+        getJson(idForIterateHero);
     }
 });
 
 $('#previous').click(function () {
-    id--;
-    if (id < 1) {
-        id++;
+    idForIterateHero--;
+    if (idForIterateHero < 1) {
+        idForIterateHero++;
         return false;
-    } else if (id === 17) {
-        getJson(--id);
+    } else if (idForIterateHero === 17) {
+        getJson(--idForIterateHero);
     } else {
-        getJson(id);
+        getJson(idForIterateHero);
     }
 });
