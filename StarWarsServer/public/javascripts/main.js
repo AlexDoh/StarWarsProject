@@ -23,6 +23,13 @@ $(window).click(function (event) {
 getJson(idForIterateHero);
 
 function addJsonToPage(idForIterateHero, json) {
+    /** @namespace json.name */
+    /** @namespace json.height */
+    /** @namespace json.mass */
+    /** @namespace json.hair_color */
+    /** @namespace json.eye_color */
+    /** @namespace json.birth_year */
+    /** @namespace json.gender */
     $(table).find('td:nth-child(1)').html(idForIterateHero);
     $(table).find('td:nth-child(2)').html(json.name);
     $(table).find('td:nth-child(3)').html(json.height);
