@@ -35,7 +35,6 @@ function addJsonToPage(idForIterateHero, json) {
 
 function getJson(idForIterateHero) {
     let urlForJSON = "http://localhost:8080/heroes?id=" + idForIterateHero;
-    console.log(urlForJSON);
 
     $.ajax({
         method: "GET",
@@ -49,7 +48,7 @@ function getJson(idForIterateHero) {
             alert("AJAX error: " + textStatus + ' : ' + errorThrown);
         },
         success: function (json) {
-            addJsonToPage(id, json);
+            addJsonToPage(idForIterateHero, json);
         }
 
     });

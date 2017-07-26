@@ -146,3 +146,8 @@ li span {
     border-radius: 50%;
     cursor: pointer;
 }
+
+#c3p0 {
+    float: left;
+    margin-right: 25px;
+}
