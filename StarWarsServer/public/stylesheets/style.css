@@ -83,10 +83,12 @@ li span {
 
 #previous {
     float: left;
+    margin-bottom: 12px;
 }
 
 #next {
     float: right;
+    margin-bottom: 12px;
 }
 
 #mask {
