@@ -1,5 +1,6 @@
 let mask = document.getElementById('mask');
 let close = document.getElementById('close');
+let help = document.getElementById('helpbutton');
 let table = document.getElementsByClassName('table')[0];
 let idForIterateHero = 1;
 
@@ -13,6 +14,9 @@ $(document).ready(function() {
 
 $(close).click(function () {
     $(mask).hide();
+});
+$(help).click(function () {
+    $(mask).show();
 });
 $(window).click(function (event) {
     if ($(event.target).is(mask)) {
