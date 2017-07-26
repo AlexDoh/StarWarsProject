@@ -4,9 +4,9 @@ let help = document.getElementById('helpbutton');
 let table = document.getElementsByClassName('table')[0];
 let idForIterateHero = 1;
 
-$(document).ready(function() {
+$(document).ready(function () {
     if ($.cookie('modal_shown') !== 'yes') {
-        $.cookie('modal_shown', 'yes', { expires: 3, path: '/' });
+        $.cookie('modal_shown', 'yes', {expires: 3, path: '/'});
     } else {
         close.click();
     }
@@ -45,18 +45,31 @@ function addJsonToPage(idForIterateHero, json) {
 }
 
 function getJson(idForIterateHero) {
-    let urlForJSON = "http://localhost:8080/heroes?id=" + idForIterateHero;
 
     $.ajax({
         method: "GET",
         dataType: "json",
-        url: urlForJSON,
+        url: 'http://localhost:8080/heroes?id=' + idForIterateHero,
         async: true,
         processData: false,
         cache: false,
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(JSON.stringify(jqXHR));
-            alert("AJAX error: " + textStatus + ' : ' + errorThrown);
+        error: function () {
+            $.ajax({
+                method: "GET",
+                dataType: "json",
+                url: 'https://swapi.co/api/people/' + idForIterateHero + '/?format=json',
+                async: true,
+                processData: false,
+                cache: false,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(JSON.stringify(jqXHR));
+                    alert("AJAX error: " + textStatus + ' : ' + errorThrown);
+                },
+                success: function (json) {
+                    addJsonToPage(idForIterateHero, json);
+                }
+
+            });
         },
         success: function (json) {
             addJsonToPage(idForIterateHero, json);
