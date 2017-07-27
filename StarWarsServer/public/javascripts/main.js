@@ -7,8 +7,7 @@ let idForIterateHero = 1;
 $(document).ready(function () {
     if ($.cookie('modal_shown') !== 'yes') {
         $.cookie('modal_shown', 'yes', {expires: 3, path: '/'});
-    } else {
-        close.click();
+        $(mask).show();
     }
 });
 
