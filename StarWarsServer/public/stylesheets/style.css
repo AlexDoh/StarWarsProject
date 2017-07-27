@@ -81,14 +81,20 @@ li span {
     float: right;
 }
 
+#helpbutton {
+    cursor: pointer;
+}
+
 #previous {
     float: left;
     margin-bottom: 12px;
+    cursor: pointer;
 }
 
 #next {
     float: right;
     margin-bottom: 12px;
+    cursor: pointer;
 }
 
 #mask {
