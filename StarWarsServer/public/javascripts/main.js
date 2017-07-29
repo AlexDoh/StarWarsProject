@@ -3,7 +3,7 @@ let close = document.getElementById('close');
 let help = document.getElementById('helpbutton');
 let table = document.getElementsByClassName('table')[0];
 let idForIterateHero = 1;
-let localServerIsUp;
+let localServerIsUp = false;
 
 $(document).ready(function () {
     if ($.cookie('modal_shown') !== 'yes') {
@@ -19,9 +19,6 @@ $(document).ready(function () {
         cache: true,
         success: function () {
             localServerIsUp = true;
-        },
-        error: function () {
-            localServerIsUp = false;
         }
     });
 });
@@ -67,7 +64,8 @@ function getJson(idForIterateHero) {
             async: true,
             cache: true,
             error: function (jqXHR, textStatus, errorThrown) {
-
+                alert(JSON.stringify(jqXHR));
+                alert("AJAX error: " + textStatus + ' : ' + errorThrown);
             },
             success: function (json) {
                 addJsonToPage(idForIterateHero, json);
@@ -82,7 +80,8 @@ function getJson(idForIterateHero) {
             async: true,
             cache: true,
             error: function (jqXHR, textStatus, errorThrown) {
-
+                alert(JSON.stringify(jqXHR));
+                alert("AJAX error: " + textStatus + ' : ' + errorThrown);
             },
             success: function (json) {
                 addJsonToPage(idForIterateHero, json);
