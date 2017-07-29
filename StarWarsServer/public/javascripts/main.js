@@ -3,12 +3,27 @@ let close = document.getElementById('close');
 let help = document.getElementById('helpbutton');
 let table = document.getElementsByClassName('table')[0];
 let idForIterateHero = 1;
+let localServerIsUp;
 
 $(document).ready(function () {
     if ($.cookie('modal_shown') !== 'yes') {
         $.cookie('modal_shown', 'yes', {expires: 3, path: '/'});
         $(mask).show();
     }
+
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        url: 'http://localhost:8080/heroes?id=' + idForIterateHero,
+        async: true,
+        cache: true,
+        success: function () {
+            localServerIsUp = true;
+        },
+        error: function () {
+            localServerIsUp = false;
+        }
+    });
 });
 
 $(close).click(function () {
@@ -44,38 +59,37 @@ function addJsonToPage(idForIterateHero, json) {
 }
 
 function getJson(idForIterateHero) {
+    if(localServerIsUp) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: 'http://localhost:8080/heroes?id=' + idForIterateHero,
+            async: true,
+            cache: true,
+            error: function (jqXHR, textStatus, errorThrown) {
 
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        url: 'http://localhost:8080/heroes?id=' + idForIterateHero,
-        async: true,
-        processData: false,
-        cache: false,
-        error: function () {
-            $.ajax({
-                method: "GET",
-                dataType: "json",
-                url: 'https://swapi.co/api/people/' + idForIterateHero + '/?format=json',
-                async: true,
-                processData: false,
-                cache: false,
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(JSON.stringify(jqXHR));
-                    alert("AJAX error: " + textStatus + ' : ' + errorThrown);
-                },
-                success: function (json) {
-                    addJsonToPage(idForIterateHero, json);
-                }
+            },
+            success: function (json) {
+                addJsonToPage(idForIterateHero, json);
+            }
 
-            });
-        },
-        success: function (json) {
-            addJsonToPage(idForIterateHero, json);
-        }
+        });
+    } else {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: 'https://swapi.co/api/people/' + idForIterateHero + '/?format=json',
+            async: true,
+            cache: true,
+            error: function (jqXHR, textStatus, errorThrown) {
 
-    });
+            },
+            success: function (json) {
+                addJsonToPage(idForIterateHero, json);
+            }
 
+        });
+    }
 }
 
 $('#next').click(function () {
