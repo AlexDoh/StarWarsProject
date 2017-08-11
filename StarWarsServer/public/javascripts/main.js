@@ -92,25 +92,19 @@ function getJson(idForIterateHero) {
 }
 
 $('#next').click(function () {
-    idForIterateHero++;
-    if (idForIterateHero > 88) {
-        idForIterateHero--;
-        return false;
-    } else if (idForIterateHero === 17) {
+    if (idForIterateHero < 88 && idForIterateHero !== 16) {
         getJson(++idForIterateHero);
-    } else {
+    } else if (idForIterateHero === 16) {
+        idForIterateHero += 2;
         getJson(idForIterateHero);
     }
 });
 
 $('#previous').click(function () {
-    idForIterateHero--;
-    if (idForIterateHero < 1) {
-        idForIterateHero++;
-        return false;
-    } else if (idForIterateHero === 17) {
+    if (idForIterateHero > 1 && idForIterateHero !== 18) {
         getJson(--idForIterateHero);
-    } else {
+    } else if (idForIterateHero === 18) {
+        idForIterateHero -= 2;
         getJson(idForIterateHero);
     }
 });
